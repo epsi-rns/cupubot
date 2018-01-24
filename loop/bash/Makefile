@@ -13,7 +13,7 @@ all: doc
 doc: 
 	@echo "Nothing to do..."
 
-# aux
+# auxiliary
 install:
 	@echo "Installing..."
 	# Scripts

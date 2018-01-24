@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 function message_usage() {
     cat <<-EOF
 usage:  cupubot [options]
