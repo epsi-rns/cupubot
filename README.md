@@ -2,7 +2,15 @@ Cupubot
 -------
 
 Cupubot is a Telegram bot.
-Just another learning project
+Just another learning project.
 
 
-Nothing yet
+Nothing yet.
+
+### Install
+
+	$ sudo make install
+
+### Uninstall
+
+	$ sudo make uninstall
