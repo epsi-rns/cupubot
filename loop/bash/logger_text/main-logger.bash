@@ -10,18 +10,14 @@
 # Can't use DIR=$(dirname "$0"), because of redirection
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-. ${DIR}/config.bash
-. ${DIR}/functions-newmember.bash
-. ${DIR}/messages.bash
-. ${DIR}/options.bash
-
-### -- usage --
-
-get_options_from_arguments "$@"
+. ${DIR}/config-logger.bash
+. ${DIR}/functions-logger.bash
 
 ### -- main -- 
 
-while true; do 
-    parse_update
-    sleep 1
-done
+parse_update 
+
+# while true; do 
+#    parse_update    
+#    sleep 1
+# done
