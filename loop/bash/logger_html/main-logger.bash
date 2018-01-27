@@ -16,18 +16,17 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ### -- main -- 
 
 echo "<html>"  >> $log_file
-echo "<head><title>Log</title></head>"  >> $log_file
+echo "<head>"  >> $log_file
+echo "    <title>Log</title>"  >> $log_file
+echo '    <meta charset="utf-8">'  >> $log_file
+echo '    <link rel="stylesheet" href="log.css">'  >> $log_file
+echo "</head>"  >> $log_file
+
 echo "<body>"  >> $log_file
 
 echo "<table>"  >> $log_file
 parse_update 
 echo "</table>"  >> $log_file
-
-# while true; do 
-#    parse_update    
-#    sleep 1
-# done
-
 
 echo "</body>"  >> $log_file
 echo "</html>"  >> $log_file

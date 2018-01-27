@@ -16,8 +16,3 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ### -- main -- 
 
 parse_update 
-
-# while true; do 
-#    parse_update    
-#    sleep 1
-# done

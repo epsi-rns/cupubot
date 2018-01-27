@@ -32,17 +32,17 @@ function parse_update() {
         get_log_line "$message"
         echo -e "${log_line_text}"
         
-        echo "<tr>"  >> $log_file
+        echo "<tr>"                  >> $log_file
         
-        echo "    <td>"      >> $log_file
+        echo "    <td valign="top">" >> $log_file
         echo "<img src='${avatar_url}' height='42' width='42' style=' vertical-align: text-top;'>" >> $log_file
-        echo "    </td>"     >> $log_file
+        echo "    </td>"             >> $log_file
         
-        echo "    <td>"      >> $log_file
-        echo "${log_line_html}"   >> $log_file
-        echo "    </td>"     >> $log_file
+        echo "    <td valign="top">" >> $log_file
+        echo "${log_line_html}"      >> $log_file
+        echo "    </td>"             >> $log_file
         
-        echo "</tr>"  >> $log_file
+        echo "</tr>"                 >> $log_file
 
         last_id=$(($last_id + 1))            
         # echo $last_id > $last_id_file
@@ -72,6 +72,7 @@ function get_log_line() {
     fi
 
     log_line_text="[ $textdate ] @${username} ~ $first_name $last_name:\n$text\n\n"
+    text=$(echo "${text//$'\n'/<br/>}")    
     log_line_html="[ $textdate ] @${username} ~ $first_name $last_name:<br/>$text<br/>"
 }
 

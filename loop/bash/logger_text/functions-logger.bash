@@ -29,7 +29,7 @@ function parse_update() {
         # echo "$last_id" 
         
         get_log_line "$message"
-        echo -e "${log_line}"
+        echo -e "${log_line}" # or using tee
         echo -e "${log_line}" >> $log_file
 
         last_id=$(($last_id + 1))            
