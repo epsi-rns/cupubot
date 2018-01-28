@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# This is a telegram bot in bash
-
-# Copyright: E. Rizqi N. Sayidina <epsi.nurwijayadi@gmail.com>
-# License:   The MIT License (MIT)
-
 ### -- config -- 
 
 # $token variable here in config.sh

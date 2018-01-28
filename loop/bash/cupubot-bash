@@ -3,5 +3,5 @@
 
 DIR=$(dirname "$0")
 DIR=${DIR}/../lib/cupubot
-. ${DIR}/main-modular.bash
+. ${DIR}/main.bash
 

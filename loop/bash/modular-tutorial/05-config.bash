@@ -9,7 +9,8 @@ config_file=~/.config/cupubot/config.sh
 
 if [ ! -f $config_file ];
 then
-    echo "Config not found!" && exit 0
+    ## exit success (0)
+    echo "Config not found!" && exit 0 
 else
     source $config_file
 fi
@@ -27,14 +28,4 @@ then
 else
     last_id=$(cat $last_id_file)
     # echo "last id = $last_id"
-fi
-
-### -- logfile --
-log_file=./logfile.txt
-
-rm $log_file
-
-if [ ! -f $log_file ];
-then
-    touch $log_file
 fi

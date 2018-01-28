@@ -19,9 +19,8 @@ install:
 	# Scripts
 	@install -D -m755 ./cupubot-bash $(DESTDIR)$(bindir)/cupubot-bash
 	# Libs
-	@mkdir -p $(DESTDIR)$(libdir)/cupubot/tasks
+	@mkdir -p $(DESTDIR)$(libdir)/cupubot
 	@install -D -m644 ./*.bash $(DESTDIR)$(libdir)/cupubot
-	@install -D -m644 ./tasks/*.bash $(DESTDIR)$(libdir)/cupubot/tasks
 
 uninstall:
 	@echo "Uninstalling..."

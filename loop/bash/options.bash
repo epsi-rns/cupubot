@@ -1,47 +1,88 @@
-#!/usr/bin/env bash
-# no need sha-bang for the script to run,
-# but needed, so file manager can detect its type.
+# reading
+# http://wiki.bash-hackers.org/howto/getopts_tutorial
 
-function get_options_from_arguments() {
+# handling command
+function handle_command_plain() {
+	local command=$1
 
-    # http://wiki.bash-hackers.org/howto/getopts_tutorial
+    case "$command" in
+        version)   
+            message_version
+            exit;;
+    esac
+}
 
-    # get options
-    count=0
-    
+# handling -command
+function handle_command_opt() {
+	local command=$1
+	
+    case "$command" in
+        -)
+            handle_command_optarg "$OPTARG"
+            ;;
+         h)  
+            message_usage
+            exit;;
+         v)  
+            message_version
+            exit;;
+         *)  
+            # Invalid Option
+            message_usage
+            exit;;
+    esac
+}
+
+# handling --command
+function handle_command_optarg() {
+	local command=$1
+	
+    case "$command" in
+        version) 
+            message_version
+            exit;;
+        help) 
+            message_usage
+            exit;;
+        observe)
+            do_observe
+            exit;;
+        reply)
+            loop_reply
+            exit;;
+        new-member)
+            loop_newmember
+            exit;;
+        logger-text)
+            do_logger_text
+            exit;;
+        logger-html)
+            do_logger_html
+            exit;;
+        *) 
+            # Invalid Option
+            message_usage
+            exit;;
+    esac
+}
+
+function get_options_from_arguments() {  
+	# get argument length	
+	[[ $# -eq "0" ]] && message_usage && exit;
+	 
     # ! : indirect expansion
     while [[ -n "${!OPTIND}" ]]; do
-        case "${!OPTIND}" in
-            version)   
-                message_version; 
-                exit;;
-        esac
+        handle_command_plain "${!OPTIND}"
 
         while getopts "vh-:" OPT; do
-            case "$OPT" in
-                -)
-                    case "$OPTARG" in
-                        version) 
-                            message_version; 
-                            exit;;
-                        help) 
-                            message_usage; 
-                            exit;;
-                        *) 
-                            continue;;
-                    esac;;
-                h)  
-                    message_usage; 
-                    exit;;
-                v)  
-                    message_version; 
-                    exit;;
-                *)  
-                    continue;;
-            esac
+             handle_command_opt "$OPT"
         done
 
         shift $OPTIND
         OPTIND=1
     done
+    
+	# Invalid Option
+    message_usage
+    exit
 }

@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
-# no need sha-bang for the script to run,
-# but needed, so file manager can detect its type.
 
-### -- function -- 
+function process_reply() {
+	# global-project : last_id
+	# global-module  : _
+	local i update message_id chat_id text
 
-function parse_update() {
-
-    updates=$(curl -s "${tele_url}/getUpdates?offset=$last_id")
+    local updates=$(curl -s "${tele_url}/getUpdates?offset=$last_id")
     # echo $updates | json_reformat
 
-    count_update=$(echo $updates | jq -r ".result | length") 
+    local count_update=$(echo $updates | jq -r ".result | length") 
     # echo $count_update
     
     [[ $count_update -eq 0 ]] && echo -n "."
@@ -27,15 +26,12 @@ function parse_update() {
         chat_id=$(echo $update | jq -r ".message.chat.id") 
         # echo "$chat_id"
         
-        text=$(echo $update | jq -r ".message.text") 
-        # echo "$text"
-        
-        get_feedback "$text"
+        get_feedback_reply "$update"
     
         result=$(curl -s "${tele_url}/sendMessage" \
                   --data-urlencode "chat_id=${chat_id}" \
                   --data-urlencode "reply_to_message_id=${message_id}" \
-                  --data-urlencode "text=$feedback"
+                  --data-urlencode "text=$return_feedback"
             );
         # echo $result | json_reformat
 
@@ -46,18 +42,24 @@ function parse_update() {
     done
 }
 
-function get_feedback() {
-	first_word=$(echo $text | head -n 1 | awk '{print $1;}')
+function get_feedback_reply() {
+	# global-module  : return_feedback
+    local update=$1
+    
+    text=$(echo $update | jq -r ".message.text") 
+    # echo "$text"
+	
+	local first_word=$(echo $text | head -n 1 | awk '{print $1;}')
 	# echo $first_word
 	
-	feedback='Good message !'
+	return_feedback='Good message !'
 	case $first_word in
         '/id') 
             username=$(echo $update | jq -r ".message.chat.username")
-            feedback="You are the mighty @${username}"
+            return_feedback="You are the mighty @${username}"
         ;;
         *)
-            feedback='Thank you for your message.'            
+            return_feedback='Thank you for your message.'            
         ;;
     esac
 }
