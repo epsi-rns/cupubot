@@ -50,5 +50,4 @@ cat << EOF >> $log_file_html
 </html>
 EOF
 
-
 } 

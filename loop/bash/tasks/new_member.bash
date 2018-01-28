@@ -34,7 +34,7 @@ function process_newmember() {
             get_feedback_newmember "$update"
             
             # display on standard output
-            echo -e "\n: ${feedback}"
+            echo -e "\n: ${return_feedback}"
 
             result=$(curl -s "${tele_url}/sendMessage" \
                       --data-urlencode "chat_id=${chat_id}" \
