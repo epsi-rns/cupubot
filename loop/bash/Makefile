@@ -9,10 +9,11 @@ libdir        = $(PREFIX)/lib
 mandir        = $(PREFIX)/man
 
 # default target
-all: dummy
+all: doc
 
-dummy: 
-	@echo "Nothing to do..."
+doc: 
+	@echo "Manual Page..."
+	@gzip -k -f ./man/cupubot-bash.1
 
 # auxiliary
 install:
